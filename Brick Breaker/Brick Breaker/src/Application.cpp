@@ -1,5 +1,6 @@
 #include "Application.h"
 #include "VideoManager.h"
+#include "Window.h"
 
 
 Application::Application()
@@ -14,5 +15,5 @@ Application::~Application()
 
 void Application::Run()
 {
-	while (VideoManager::GetWindowOpen()) { VideoManager::WindowLoop(); }
+	while (Window::GetWindowOpen()) { VideoManager::WindowLoop(); }
 }
