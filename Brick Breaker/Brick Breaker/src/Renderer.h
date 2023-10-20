@@ -2,6 +2,11 @@
 
 #include "Core.h"
 
+enum class RenderMode
+{
+	RENDER_FILL,
+	RENDER_LINE
+};
 class Renderer
 {
 public:

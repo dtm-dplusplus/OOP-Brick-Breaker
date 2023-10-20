@@ -5,8 +5,8 @@
 
 SDL_Renderer* Renderer::m_renderer{ NULL };
 SDL_Color Renderer::clearColor{ 0x00, 0x00, 0x00,0xFF };
-int Renderer::renderScaleX{Window::GetWidth()};
-int Renderer::renderScaleY{ Window::GetHeight() };
+int Renderer::renderScaleX{Window::GetWidthI()};
+int Renderer::renderScaleY{ Window::GetHeightI() };
 
 bool Renderer::StartUp()
 {

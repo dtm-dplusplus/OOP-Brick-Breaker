@@ -6,7 +6,5 @@ public:
 	~Application();
 
 	static void Run();
-
-private:
 };
 

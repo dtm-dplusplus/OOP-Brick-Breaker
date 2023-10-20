@@ -11,8 +11,17 @@ public:
 
 	static SDL_Window*& GetSDLWindow() { return m_window; }
 
-	static int GetWidth() { return m_winWidth; }
-	static int GetHeight() { return m_winHeight; }
+
+	static int GetWidthI() { return m_winWidth; }
+	static int GetWidthHalfI() { return m_winWidth / 2; }
+	static float GetWidthF() { return static_cast<float>(m_winWidth); }
+	static float GetWidthHalfF() { return static_cast<float>(m_winWidth / 2); }
+
+	static int GetHeightI() { return m_winHeight; }
+	static int GetHeightHalfI() { return m_winHeight / 2; }
+	static float GetHeightF() { return static_cast<float>(m_winHeight); }
+	static float GetHeightHalfF() { return static_cast<float>(m_winHeight / 2); }
+
 
 	static bool GetWindowOpen() { return windowOpen; }
 	static void SetWindowOpen(const bool _window_open) { windowOpen = _window_open; }

@@ -14,9 +14,7 @@ Object::~Object()
 void Object::OnUpdate()
 {
 	// Update Collider
-	Collider.Rect.x = Position.x;
-	Collider.Rect.y = Position.y;
-
+	
 }
 
 void Object::OnRender()

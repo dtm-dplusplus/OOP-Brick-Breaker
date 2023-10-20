@@ -1,19 +1,21 @@
 #include "Application.h"
+
+#include "Engine.h"
 #include "VideoManager.h"
 #include "Window.h"
 
 
 Application::Application()
 {
-	VideoManager::StartUp();
+	Engine::Startup();
 }
 
 Application::~Application()
 {
-	VideoManager::Shutdown();
+	Engine::ShutDown();
 }
 
 void Application::Run()
 {
-	while (Window::GetWindowOpen()) { VideoManager::WindowLoop(); }
+	while (Window::GetWindowOpen()) { Engine::EngineLoop(); }
 }

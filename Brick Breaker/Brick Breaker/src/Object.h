@@ -2,7 +2,6 @@
 
 #include "Core.h"
 
-
 class Object
 {
 public:
@@ -15,6 +14,7 @@ public:
 	std::string& GetName() { return name; }
 	std::string GetName() const { return name; }
 
+	glm::vec2& GetPosition() { return Position; }
 	glm::vec2 GetPosition() const { return Position; }
 	void SetPosition(const glm::vec2& _position) { Position = _position; }
 
@@ -31,5 +31,6 @@ protected:
 
 private:
 	std::string name;
+
 };
 
