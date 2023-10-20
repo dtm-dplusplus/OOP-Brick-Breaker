@@ -2,6 +2,7 @@
 
 #include "Core.h"
 #include "Window.h"
+#include "Object.h"
 #include  "Renderer.h"
 #include "UI.h"
 #include "../vendor/imgui-master/imgui.h"
@@ -67,11 +68,15 @@ void VideoManager::WindowLoop()
 	Renderer::ClearRenderer();
 	UI::ClearUI();
 
-	if (static bool b{1})ImGui::ShowDemoWindow(&b);
-		
+	if (static bool b{0})ImGui::ShowDemoWindow(&b);
 
 	static float x{ Window::GetWidth() / 2.0f }, y{ Window::GetHeight() / 2.0f };
-	Renderer::RenderPointF(x,y, {0xFF, 0x00, 0x00,0xFF});
+	Object obj;
+	obj.GetCollider().GetRect() = { x, y, 30,30 };
+	obj.GetCollider().GetColor() = { 0xFF, 0x00, 0x00,0xFF };
+
+	Renderer::RenderRectFill(obj.GetCollider());
+
 	UI::RenderUI();
 	Renderer::UpdateRenderer();
 }

@@ -2,6 +2,7 @@
 
 #include "Core.h"
 
+
 class Object
 {
 public:
@@ -10,11 +11,23 @@ public:
 
 	virtual void OnUpdate();
 	virtual void OnRender();
-	
-protected:
-	void OnBeginPlay();
 
-	SDL_Rect Collider;
+	std::string& GetName() { return name; }
+	std::string GetName() const { return name; }
+
+	glm::vec2 GetPosition() const { return Position; }
+	void SetPosition(const glm::vec2& _position) { Position = _position; }
+
+	Collider& GetCollider() { return Collider; }
+	Collider GetCollider() const { return Collider; }
+	void SetCollider(const Collider& _collider) { Collider = _collider; }
+
+
+protected:
+	virtual void OnBeginPlay();
+
+	glm::vec2 Position;
+	Collider Collider;
 
 private:
 	std::string name;

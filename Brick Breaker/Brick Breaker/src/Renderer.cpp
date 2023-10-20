@@ -43,8 +43,15 @@ void Renderer::RenderPointF(const float _x, const float _y, const SDL_Color& _co
 	SDL_RenderDrawPointF(m_renderer, _x, _y);
 }
 
-void Renderer::RenderRectF(const SDL_FRect& _col, const SDL_Color& _col_color)
+void Renderer::RenderRectFill(const Collider& _collider)
 {
-	SDL_SetRenderDrawColor(m_renderer, _col_color.r, _col_color.g, _col_color.b, _col_color.a);
-	SDL_RenderFillRectF(m_renderer, &_col);
+	SDL_SetRenderDrawColor(m_renderer, _collider.Color.r, _collider.Color.g, _collider.Color.b, _collider.Color.a);
+	SDL_RenderFillRectF(m_renderer, &_collider.Rect);
+}
+
+
+void Renderer::RenderRectLine(const Collider& _collider)
+{
+	SDL_SetRenderDrawColor(m_renderer, _collider.Color.r, _collider.Color.g, _collider.Color.b, _collider.Color.a);
+	SDL_RenderDrawRectF(m_renderer, &_collider.Rect);
 }
