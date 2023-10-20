@@ -15,9 +15,13 @@ public:
 
 	Texture Texture;
 
-	std::string& GetName() { return name; }
-	std::string GetName() const { return name; }
-	void SetName(const std::string& _name) { name = _name; }
+	std::string& GetName() { return Name; }
+	std::string GetName() const { return Name; }
+	void SetName(const std::string& _name) { Name = _name; }
+
+	int& GetRenderMode() { return RenderMode; }
+	int GetRenderMode() const { return RenderMode; }
+	void SetRenderMode(const int _render_mode) { RenderMode = _render_mode; }
 
 	glm::vec2& GetPosition() { return Position; }
 	glm::vec2 GetPosition() const { return Position; }
@@ -28,14 +32,13 @@ public:
 	void SetCollider(const Collider& _collider) { Collider = _collider; }
 
 protected:
-	virtual void OnBeginPlay();
-
 	glm::vec2 Position;
 	Collider Collider;
 
 private:
 	static int ObjectCount;
-	std::string name;
+	std::string Name;
+	int RenderMode;
 
 };
 
