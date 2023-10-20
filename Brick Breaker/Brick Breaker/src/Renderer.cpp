@@ -1,9 +1,14 @@
 #include "Renderer.h"
+
+#include "UI.h"
 #include "Window.h"
 
 SDL_Renderer* Renderer::m_renderer{ NULL };
+SDL_Color Renderer::clearColor{ 0x00, 0x00, 0x00,0xFF };
+int Renderer::renderScaleX{Window::GetWidth()};
+int Renderer::renderScaleY{ Window::GetHeight() };
 
-bool Renderer::Startup()
+bool Renderer::StartUp()
 {
 	m_renderer = SDL_CreateRenderer(Window::GetSDLWindow(), -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 	if (m_renderer == NULL)
@@ -23,11 +28,12 @@ bool Renderer::Shutdown()
 
 void Renderer::ClearRenderer()
 {
-	SDL_SetRenderDrawColor(m_renderer, 0x00, 0x00, 0x00, 0xFF);
+	SDL_SetRenderDrawColor(m_renderer, clearColor.r, clearColor.g, clearColor.b, clearColor.a);
 	SDL_RenderClear(m_renderer);
 }
 void Renderer::UpdateRenderer()
 {
+	SDL_RenderSetScale(m_renderer, UI::GetImGuiIO().DisplayFramebufferScale.x, UI::GetImGuiIO().DisplayFramebufferScale.y);
 	SDL_RenderPresent(m_renderer);
 }
 
@@ -37,7 +43,7 @@ void Renderer::RenderPointF(const float _x, const float _y, const SDL_Color& _co
 	SDL_RenderDrawPointF(m_renderer, _x, _y);
 }
 
-void Renderer::RenderColliderF(const SDL_FRect& _col, const SDL_Color& _col_color)
+void Renderer::RenderRectF(const SDL_FRect& _col, const SDL_Color& _col_color)
 {
 	SDL_SetRenderDrawColor(m_renderer, _col_color.r, _col_color.g, _col_color.b, _col_color.a);
 	SDL_RenderFillRectF(m_renderer, &_col);

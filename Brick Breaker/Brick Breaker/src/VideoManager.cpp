@@ -3,11 +3,16 @@
 #include "Core.h"
 #include "Window.h"
 #include  "Renderer.h"
+#include "UI.h"
+#include "../vendor/imgui-master/imgui.h"
+#include "../vendor/imgui-master/imgui_impl_sdl2.h"
+#include "../vendor/imgui-master/imgui_internal.h"
 
 bool VideoManager::StartUp()
 {
-	Window::Startup();
-	Renderer::Startup();
+	Window::StartUp();
+	Renderer::StartUp();
+	UI::StartUp();
 
 	return true;
 }
@@ -26,6 +31,7 @@ void VideoManager::WindowLoop()
 	SDL_Event event;
 	while (SDL_PollEvent(&event) != 0)
 	{
+		ImGui_ImplSDL2_ProcessEvent(&event);
 		switch (event.type)
 		{
 			case SDL_KEYDOWN:
@@ -59,10 +65,13 @@ void VideoManager::WindowLoop()
 	}
 
 	Renderer::ClearRenderer();
+	UI::ClearUI();
+
+	if (static bool b{1})ImGui::ShowDemoWindow(&b);
+		
 
 	static float x{ Window::GetWidth() / 2.0f }, y{ Window::GetHeight() / 2.0f };
-	Renderer::SetRenderDrawColor({ 0xFF, 0x00, 0x00, 0xFF });
-	Renderer::RenderPointF(x,y);
-
+	Renderer::RenderPointF(x,y, {0xFF, 0x00, 0x00,0xFF});
+	UI::RenderUI();
 	Renderer::UpdateRenderer();
 }

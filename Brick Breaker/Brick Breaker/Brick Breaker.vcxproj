@@ -143,19 +143,38 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Object.h" />
     <ClInclude Include="src\Renderer.h" />
     <ClInclude Include="src\Application.h" />
     <ClInclude Include="src\Core.h" />
     <ClInclude Include="src\VideoManager.h" />
     <ClInclude Include="src\Window.h" />
+    <ClInclude Include="src\UI.h" />
+    <ClInclude Include="vendor\imgui-master\imconfig.h" />
+    <ClInclude Include="vendor\imgui-master\imgui.h" />
+    <ClInclude Include="vendor\imgui-master\imgui_impl_sdl2.h" />
+    <ClInclude Include="vendor\imgui-master\imgui_impl_sdlrenderer2.h" />
+    <ClInclude Include="vendor\imgui-master\imgui_internal.h" />
+    <ClInclude Include="vendor\imgui-master\imstb_rectpack.h" />
+    <ClInclude Include="vendor\imgui-master\imstb_textedit.h" />
+    <ClInclude Include="vendor\imgui-master\imstb_truetype.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Object.cpp" />
     <ClCompile Include="src\Renderer.cpp" />
     <ClCompile Include="src\Application.cpp" />
     <ClCompile Include="src\Core.cpp" />
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\VideoManager.cpp" />
     <ClCompile Include="src\Window.cpp" />
+    <ClCompile Include="src\UI.cpp" />
+    <ClCompile Include="vendor\imgui-master\imgui.cpp" />
+    <ClCompile Include="vendor\imgui-master\imgui_demo.cpp" />
+    <ClCompile Include="vendor\imgui-master\imgui_draw.cpp" />
+    <ClCompile Include="vendor\imgui-master\imgui_impl_sdl2.cpp" />
+    <ClCompile Include="vendor\imgui-master\imgui_impl_sdlrenderer2.cpp" />
+    <ClCompile Include="vendor\imgui-master\imgui_tables.cpp" />
+    <ClCompile Include="vendor\imgui-master\imgui_widgets.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -6,7 +6,7 @@
 class Window
 {
 public:
-	static bool Startup();
+	static bool StartUp();
 	static bool Shutdown();
 
 	static SDL_Window*& GetSDLWindow() { return m_window; }

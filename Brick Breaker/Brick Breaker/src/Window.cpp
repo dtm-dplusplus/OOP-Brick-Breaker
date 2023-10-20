@@ -7,7 +7,7 @@ int Window::m_winHeight{ 480 };
 
 SDL_Window* Window::m_window{ NULL };
 
-bool Window::Startup()
+bool Window::StartUp()
 {
 	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0)
 	{
