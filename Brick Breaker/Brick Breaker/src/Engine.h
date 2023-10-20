@@ -8,9 +8,13 @@ public:
 	Engine();
 	~Engine();
 
-	void EngineLoop();
+	static void EngineLoop();
 
-	void OnUpdate();
-	void OnRender();
+	static void SetGame(Game*& _game) { m_Game = _game; }
+private:
+	static Game* m_Game;
+
+	static void OnUpdate();
+	static void OnRender();
 };
 

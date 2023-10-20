@@ -160,6 +160,7 @@
     <ClInclude Include="src\vendor\imgui-master\imstb_rectpack.h" />
     <ClInclude Include="src\vendor\imgui-master\imstb_textedit.h" />
     <ClInclude Include="src\vendor\imgui-master\imstb_truetype.h" />
+    <ClInclude Include="src\Texture.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Game.cpp" />
@@ -179,6 +180,7 @@
     <ClCompile Include="src\vendor\imgui-master\imgui_impl_sdlrenderer2.cpp" />
     <ClCompile Include="src\vendor\imgui-master\imgui_tables.cpp" />
     <ClCompile Include="src\vendor\imgui-master\imgui_widgets.cpp" />
+    <ClCompile Include="src\Texture.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

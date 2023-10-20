@@ -15,7 +15,7 @@ Application::~Application()
 	delete m_Engine;
 }
 
-void Application::Run()
+void Application::Run() const
 {
 	while (Window::GetWindowOpen()) { m_Engine->EngineLoop(); }
 }

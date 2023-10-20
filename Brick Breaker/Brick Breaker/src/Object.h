@@ -1,20 +1,23 @@
 #pragma once
 
 #include "Core.h"
+#include "Texture.h"
 
 class Object
 {
 public:
 	Object();
-	Object(const glm::vec2& _position) { Position = _position; };
-
+	explicit Object(const glm::vec2& _position);;
 	virtual ~Object();
 
 	virtual void OnUpdate();
 	virtual void OnRender();
 
+	Texture Texture;
+
 	std::string& GetName() { return name; }
 	std::string GetName() const { return name; }
+	void SetName(const std::string& _name) { name = _name; }
 
 	glm::vec2& GetPosition() { return Position; }
 	glm::vec2 GetPosition() const { return Position; }
@@ -24,7 +27,6 @@ public:
 	Collider GetCollider() const { return Collider; }
 	void SetCollider(const Collider& _collider) { Collider = _collider; }
 
-
 protected:
 	virtual void OnBeginPlay();
 
@@ -32,6 +34,7 @@ protected:
 	Collider Collider;
 
 private:
+	static int ObjectCount;
 	std::string name;
 
 };

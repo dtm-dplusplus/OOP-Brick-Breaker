@@ -14,6 +14,7 @@
 
 #include <glm.hpp>
 #include <SDL.h>
+#include <SDL_image.h>
 
 struct Collider
 {

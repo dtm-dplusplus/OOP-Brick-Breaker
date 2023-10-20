@@ -2,8 +2,8 @@
 
 bool Window::windowOpen{ true };
 
-int Window::m_winWidth{ 720 };
-int Window::m_winHeight{ 480 };
+int Window::m_winWidth{ 1280 };
+int Window::m_winHeight{ 720 };
 
 SDL_Window* Window::m_window{ NULL };
 
@@ -22,12 +22,21 @@ bool Window::StartUp()
 		return false;
 	}
 
+	//Initialize PNG loading
+	if (!(IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG))
+	{
+		printf("SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError());
+		return false;
+	}
+
 	return true;
 }
 
 bool Window::Shutdown()
 {
 	SDL_DestroyWindow(m_window);
+	IMG_Quit();
+	// Mix_Quit();
 
 	return true;
 }

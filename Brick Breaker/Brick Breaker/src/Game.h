@@ -7,12 +7,14 @@ class Game
 {
 public:
 	Game();
-	~Game();
+	virtual ~Game();
 
-	static void OnUpdate();
+	virtual void GameLoop();
+	virtual void OnUpdate();
+	virtual void OnRender();
 
-private:
 	std::vector<Object*> GetObjects() { return Objects; }
+private:
 
 	std::vector<Object*> Objects;
 };

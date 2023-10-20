@@ -7,7 +7,7 @@ public:
 	Application();
 	~Application();
 
-	void Run();
+	void Run() const;
 
 private:
 	Engine* m_Engine;

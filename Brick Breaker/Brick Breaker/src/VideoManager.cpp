@@ -7,8 +7,6 @@
 
 bool VideoManager::StartUp()
 {
-	
-
 	return true;
 }
 

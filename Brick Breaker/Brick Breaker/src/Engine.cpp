@@ -4,11 +4,15 @@
 #include "VideoManager.h"
 #include "Game.h"
 
+Game* Engine::m_Game{nullptr};
+
 Engine::Engine()
 {
 	Window::StartUp();
 	Renderer::StartUp();
 	UI::StartUp();
+
+	m_Game = new Game;
 }
 
 Engine::~Engine()
@@ -62,8 +66,9 @@ void Engine::EngineLoop()
 	Renderer::ClearRenderer();
 	UI::ClearUI();
 
-	// Update Renderer
-	Game::OnUpdate();
+	// Update Game
+	m_Game->OnUpdate();
+	m_Game->OnRender();
 
 	// Render Present
 	UI::RenderUI();
@@ -73,10 +78,11 @@ void Engine::EngineLoop()
 void Engine::OnUpdate()
 {
 	// Update Game Components and objects
+	m_Game->OnUpdate();
 }
 
 void Engine::OnRender()
 {
 	// Render Game Components and objects
-
+	m_Game->OnRender();
 }

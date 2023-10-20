@@ -39,6 +39,7 @@ void UI::ClearUI()
 
 void UI::RenderUI()
 {
+	// ImGui::ShowDemoWindow();
     ImGui::Render();
     ImGui_ImplSDLRenderer2_RenderDrawData(ImGui::GetDrawData());
 }
