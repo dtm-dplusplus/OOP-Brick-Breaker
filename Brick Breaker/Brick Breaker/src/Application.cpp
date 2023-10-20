@@ -7,15 +7,15 @@
 
 Application::Application()
 {
-	Engine::Startup();
+	m_Engine = new Engine;
 }
 
 Application::~Application()
 {
-	Engine::ShutDown();
+	delete m_Engine;
 }
 
 void Application::Run()
 {
-	while (Window::GetWindowOpen()) { Engine::EngineLoop(); }
+	while (Window::GetWindowOpen()) { m_Engine->EngineLoop(); }
 }

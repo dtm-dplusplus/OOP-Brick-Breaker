@@ -6,5 +6,7 @@ int main(int argc, char* args[])
 
 	app->Run();
 
+	delete app;
+
 	return 0;
 }

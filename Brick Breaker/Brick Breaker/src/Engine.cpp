@@ -1,21 +1,17 @@
 #include "Engine.h"
 
 #include "Core.h"
-#include "Object.h"
-#include "Renderer.h"
 #include "VideoManager.h"
-#include "UI.h"
-#include "Window.h"
+#include "Game.h"
 
-void Engine::Startup()
+Engine::Engine()
 {
 	Window::StartUp();
 	Renderer::StartUp();
 	UI::StartUp();
 }
 
-
-void Engine::ShutDown()
+Engine::~Engine()
 {
 	Window::Shutdown();
 	Renderer::Shutdown();
@@ -67,19 +63,7 @@ void Engine::EngineLoop()
 	UI::ClearUI();
 
 	// Update Renderer
-	{
-		// if (static bool b{ 0 })ImGui::ShowDemoWindow(&b);
-		Object obj;
-		obj.GetCollider().GetRect() = { Window::GetWidthHalfF(), Window::GetHeightHalfF(), 30,30 };
-		obj.GetCollider().GetColor() = { 0xFF, 0x00, 0x00,0xFF };
-
-		Renderer::RenderRectFill(obj.GetCollider());
-
-		ImGui::Begin("Object Properties");
-		ImGui::DragFloat2("Position", &obj.GetPosition().x);
-		ImGui::ColorEdit4("Color", &obj.GetCollider().Color.r);
-		ImGui::End();
-	}
+	Game::OnUpdate();
 
 	// Render Present
 	UI::RenderUI();

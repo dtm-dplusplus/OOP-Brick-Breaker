@@ -1,7 +1,6 @@
 #include "Object.h"
 
 #include "Renderer.h"
-#include "../vendor/imgui-master/imgui.h"
 
 Object::Object()
 {

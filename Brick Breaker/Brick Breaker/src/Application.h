@@ -1,10 +1,15 @@
 #pragma once
+#include "Engine.h"
+
 class Application
 {
 public:
 	Application();
 	~Application();
 
-	static void Run();
+	void Run();
+
+private:
+	Engine* m_Engine;
 };
 

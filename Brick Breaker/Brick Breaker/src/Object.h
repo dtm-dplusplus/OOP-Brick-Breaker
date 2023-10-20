@@ -6,6 +6,8 @@ class Object
 {
 public:
 	Object();
+	Object(const glm::vec2& _position) { Position = _position; };
+
 	virtual ~Object();
 
 	virtual void OnUpdate();

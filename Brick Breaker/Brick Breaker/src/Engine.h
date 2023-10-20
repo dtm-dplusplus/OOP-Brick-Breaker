@@ -1,13 +1,14 @@
 #pragma once
+#include "Game.h"
 
 
 class Engine
 {
 public:
-	static void Startup();
-	static void ShutDown();
+	Engine();
+	~Engine();
 
-	static void EngineLoop();
+	void EngineLoop();
 
 	void OnUpdate();
 	void OnRender();
