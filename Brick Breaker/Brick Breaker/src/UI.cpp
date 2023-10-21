@@ -39,10 +39,6 @@ void UI::ClearUI()
 
 void UI::RenderUI()
 {
-    static bool showDemo{ false };
-    ImGui::Checkbox("Demo", &showDemo);
-    if(showDemo) ImGui::ShowDemoWindow();
-
     ImGui::Render();
     ImGui_ImplSDLRenderer2_RenderDrawData(ImGui::GetDrawData());
 }

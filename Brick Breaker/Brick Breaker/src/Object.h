@@ -7,38 +7,41 @@ class Object
 {
 public:
 	Object();
-	explicit Object(const glm::vec2& _position);;
+	explicit Object(const glm::vec2& _position);
 	virtual ~Object();
 
 	virtual void OnUpdate();
 	virtual void OnRender();
 
-	Texture Texture;
 
-	std::string& GetName() { return Name; }
-	std::string GetName() const { return Name; }
-	void SetName(const std::string& _name) { Name = _name; }
+	std::string& GetName();
+	std::string GetName() const;
+	void SetName(const std::string& _name);
 
-	int& GetRenderMode() { return RenderMode; }
-	int GetRenderMode() const { return RenderMode; }
-	void SetRenderMode(const int _render_mode) { RenderMode = _render_mode; }
+	glm::vec2& GetPosition();
+	glm::vec2 GetPosition() const;
+	void SetPosition(const glm::vec2& _position);
 
-	glm::vec2& GetPosition() { return Position; }
-	glm::vec2 GetPosition() const { return Position; }
-	void SetPosition(const glm::vec2& _position) { Position = _position; }
+	glm::vec2& GetScale();
+	glm::vec2 GetScale() const;
+	void SetScale(const glm::vec2& _scale);
 
-	Collider& GetCollider() { return Collider; }
-	Collider GetCollider() const { return Collider; }
-	void SetCollider(const Collider& _collider) { Collider = _collider; }
+	Collider*& GetCollider();
+	Collider* GetCollider() const;
+	void SetCollider(const Collider& _collider);
+
+	Texture*& GetTexture();
 
 protected:
-	glm::vec2 Position;
-	Collider Collider;
+	glm::vec2 m_Position;
+	glm::vec2 m_Scale;
+
+	Collider* m_Collider;
 
 private:
-	static int ObjectCount;
-	std::string Name;
-	int RenderMode;
+	static int s_ObjectCount;
+	std::string m_ObjectName;
 
+	Texture* m_Texture;
 };
 

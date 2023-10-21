@@ -1,22 +1,30 @@
 #include "Object.h"
 
+#include <Windows.h>
+
 #include "Renderer.h"
 
-int Object::ObjectCount{0};
+int Object::s_ObjectCount{0};
 
 
 Object::Object()
 {
-	Position = {0.f,0.f};
-	Collider.Update(Position);
-	Name = "Object" + std::to_string(ObjectCount++);
+	m_Position = {0.f, 0.f};
+	m_Scale = { 1.0f, 1.0f };
+	m_Collider = new Collider;
+	m_Texture = new Texture;
+
+	m_ObjectName = "Object" + std::to_string(s_ObjectCount++);
 }
 
-Object::Object(const glm::vec2& _position)
+Object::Object(const glm::vec2& _position): m_Scale{1.0f, 1.0f}, m_Collider{nullptr}, m_Texture{nullptr}
 {
-	Position = _position;
-	Collider.Update(Position);
-	Name = "Object" + std::to_string(ObjectCount++);
+	m_Position = _position;
+	m_Scale = { 1.0f, 1.0f };
+	m_Collider = new Collider;
+	m_Texture = new Texture;
+
+	m_ObjectName = "Object" + std::to_string(s_ObjectCount++);
 }
 
 Object::~Object()
@@ -25,12 +33,77 @@ Object::~Object()
 
 void Object::OnUpdate()
 {
-	// Update Collider
-	Collider.Update(Position);
+	// Update m_Collider
+	m_Collider->Update(m_Position);
 }
 
 void Object::OnRender()
 {
-	if(RenderMode){ Renderer::RenderRectFill(Collider); }
-	else { Renderer::RenderRectLine(Collider); }
+	Renderer::RenderTexture(m_Texture, m_Collider);
+	if(m_Collider->IsRenderCollider()){ Renderer::RenderRectLine(m_Collider); }
+}
+
+std::string& Object::GetName()
+{
+	return m_ObjectName;
+}
+
+std::string Object::GetName() const
+{
+	return m_ObjectName;
+}
+
+void Object::SetName(const std::string& _name)
+{
+	m_ObjectName = _name;
+}
+
+glm::vec2& Object::GetPosition()
+{
+	return m_Position;
+}
+
+glm::vec2 Object::GetPosition() const
+{
+	return m_Position;
+}
+
+void Object::SetPosition(const glm::vec2& _position)
+{
+	m_Position = _position;
+}
+
+glm::vec2& Object::GetScale()
+{
+	return m_Scale;
+}
+
+glm::vec2 Object::GetScale() const
+{
+	return m_Scale;
+}
+
+void Object::SetScale(const glm::vec2& _scale)
+{
+	m_Scale = _scale;
+}
+
+Collider*& Object::GetCollider()
+{
+	return m_Collider;
+}
+
+Collider* Object::GetCollider() const
+{
+	return m_Collider;
+}
+
+void Object::SetCollider(const ::Collider& _collider)
+{
+	m_Collider = new ::Collider(_collider);
+}
+
+Texture*& Object::GetTexture()
+{
+	return m_Texture;
 }
