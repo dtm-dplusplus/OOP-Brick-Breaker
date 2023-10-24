@@ -16,6 +16,7 @@
 #include <SDL.h>
 #include <SDL_image.h>
 
+
 struct Collider
 {
 	SDL_FRect Rect;
@@ -44,7 +45,4 @@ struct Collider
 	bool& IsRenderCollider() { return RenderCollider; }
 	bool IsRenderCollider() const { return RenderCollider; }
 };
-
-
-
 #endif // _CORE_H_

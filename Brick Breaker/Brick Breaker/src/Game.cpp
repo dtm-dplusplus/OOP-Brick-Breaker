@@ -2,16 +2,18 @@
 
 Game::Game()
 {
-	Objects.push_back(new Object({ Window::GetWidthF() / 5.f * 2, Window::GetHeightHalfF() }));
-	Objects.push_back(new Object({ Window::GetWidthF() / 5.f * 3, Window::GetHeightHalfF() }));
-	Objects.push_back(new Object({ Window::GetWidthF() / 5.f * 4, Window::GetHeightHalfF() }));
+	Objects.push_back(new Object);
+	Objects[0]->SetPosition({ Window::GetWidthHalfF(), Window::GetHeightHalfF() });
 
 	for (Object*& obj : Objects)
 	{
-		obj->SetCollider({obj->GetPosition().x, obj->GetPosition().y, 40, 40} );
+		obj->SetCollider({{obj->GetPosition().x, obj->GetPosition().y, 40, 40}} );
 		obj->GetTexture()->SetTexturePath("res\\textures\\24-Breakout-Tiles.png");
 		obj->GetTexture()->LoadTexture();
 	}
+
+	Objects[0]->SetName("Ball");
+	Objects[0]->SetVelocity({ 20.f, 0.0f });
 }
 
 Game::~Game()
@@ -25,9 +27,13 @@ void Game::GameLoop()
 
 
 	// Do Game systems and logic
+	if (Objects[0]->GetCollider()->GetBoundLeft() <= 0 ||
+		Objects[0]->GetCollider()->GetBoundRight() >= Window::GetWidthF())
+	{
+		Objects[0]->GetVelocity() = -Objects[0]->GetVelocity();
+	}
+}	
 
-
-}
 
 void Game::OnUpdate()
 {
@@ -52,7 +58,8 @@ void Game::OnUpdate()
 				if(ImGui::TreeNode("Transform"))
 				{
 					ImGui::DragFloat2("Position", &Objects[i]->GetPosition().x);
-					ImGui::DragFloat2("Scale", &Objects[i]->GetScale().x);
+					ImGui::DragFloat2("Velocity", &Objects[i]->GetVelocity().x);
+					// ImGui::DragFloat2("Scale", &Objects[i]->GetScale().x);
 					ImGui::TreePop();
 				}
 				if (ImGui::TreeNode("Collider"))

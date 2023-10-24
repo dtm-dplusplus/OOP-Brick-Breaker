@@ -10,6 +10,7 @@ int Object::s_ObjectCount{0};
 Object::Object()
 {
 	m_Position = {0.f, 0.f};
+	m_Velocity = { 0.f, 0.f };
 	m_Scale = { 1.0f, 1.0f };
 	m_Collider = new Collider;
 	m_Texture = new Texture;
@@ -17,15 +18,6 @@ Object::Object()
 	m_ObjectName = "Object" + std::to_string(s_ObjectCount++);
 }
 
-Object::Object(const glm::vec2& _position): m_Scale{1.0f, 1.0f}, m_Collider{nullptr}, m_Texture{nullptr}
-{
-	m_Position = _position;
-	m_Scale = { 1.0f, 1.0f };
-	m_Collider = new Collider;
-	m_Texture = new Texture;
-
-	m_ObjectName = "Object" + std::to_string(s_ObjectCount++);
-}
 
 Object::~Object()
 {
@@ -33,6 +25,9 @@ Object::~Object()
 
 void Object::OnUpdate()
 {
+	// Update Position from velocity
+	m_Position += m_Velocity;
+
 	// Update m_Collider
 	m_Collider->Update(m_Position);
 }
@@ -71,6 +66,21 @@ glm::vec2 Object::GetPosition() const
 void Object::SetPosition(const glm::vec2& _position)
 {
 	m_Position = _position;
+}
+
+glm::vec2& Object::GetVelocity()
+{
+	return m_Velocity;
+}
+
+glm::vec2 Object::GetVelocity() const
+{
+	return m_Velocity;
+}
+
+void Object::SetVelocity(const glm::vec2& _velocity)
+{
+	m_Velocity = _velocity;
 }
 
 glm::vec2& Object::GetScale()

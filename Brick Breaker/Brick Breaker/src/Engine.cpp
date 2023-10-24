@@ -68,6 +68,7 @@ void Engine::EngineLoop()
 
 	// Update Game
 	m_Game->OnUpdate();
+	m_Game->GameLoop();
 	m_Game->OnRender();
 
 	// Render Present

@@ -7,7 +7,6 @@ class Object
 {
 public:
 	Object();
-	explicit Object(const glm::vec2& _position);
 	virtual ~Object();
 
 	virtual void OnUpdate();
@@ -22,6 +21,10 @@ public:
 	glm::vec2 GetPosition() const;
 	void SetPosition(const glm::vec2& _position);
 
+	glm::vec2& GetVelocity();
+	glm::vec2 GetVelocity() const;
+	void SetVelocity(const glm::vec2& _velocity);
+
 	glm::vec2& GetScale();
 	glm::vec2 GetScale() const;
 	void SetScale(const glm::vec2& _scale);
@@ -35,6 +38,7 @@ public:
 protected:
 	glm::vec2 m_Position;
 	glm::vec2 m_Scale;
+	glm::vec2 m_Velocity;
 
 	Collider* m_Collider;
 
