@@ -27,6 +27,6 @@ public:
 	static void RenderTexture(Texture*& _texture, Collider*& _collider);
 
 private:
-	static SDL_Renderer* m_renderer;
-	static SDL_Color clearColor;
+	static SDL_Renderer* s_Renderer;
+	static SDL_Color s_ClearColor;
 };

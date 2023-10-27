@@ -2,17 +2,17 @@
 #include "UI.h"
 #include "Window.h"
 
-SDL_Event Input:: m_Event{};
-int Input::MouseX{};
-int Input::MouseY{};
+SDL_Event Input:: s_Event{};
+int Input::s_MouseX{};
+int Input::s_MouseY{};
 
 
 void Input::PollInput()
 {
-	while (SDL_PollEvent(&m_Event) != 0)
+	while (SDL_PollEvent(&s_Event) != 0)
 	{
-		ImGui_ImplSDL2_ProcessEvent(&m_Event);
-		switch (m_Event.type)
+		ImGui_ImplSDL2_ProcessEvent(&s_Event);
+		switch (s_Event.type)
 		{
 		case SDL_KEYDOWN:
 		{
@@ -21,8 +21,8 @@ void Input::PollInput()
 
 		case SDL_MOUSEMOTION:
 			{
-			// SDL_GetRelativeMouseState(&MouseX, &MouseY);
-			SDL_GetMouseState(&MouseX, &MouseY);
+			// SDL_GetRelativeMouseState(&s_MouseX, &s_MouseY);
+			SDL_GetMouseState(&s_MouseX, &s_MouseY);
 			}
 		case SDL_MOUSEBUTTONDOWN:
 		{
@@ -30,7 +30,7 @@ void Input::PollInput()
 		}
 		case SDL_WINDOWEVENT:
 		{
-			switch (m_Event.window.event)
+			switch (s_Event.window.event)
 			{
 			case SDL_WINDOWEVENT_CLOSE:
 			{
@@ -52,6 +52,6 @@ void Input::PollInput()
 
 int Input::GetMouseMotionX()
 {
-	return  MouseX;
+	return  s_MouseX;
 }
 

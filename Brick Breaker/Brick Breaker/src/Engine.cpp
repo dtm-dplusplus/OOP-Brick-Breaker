@@ -5,7 +5,7 @@
 #include "Game.h"
 #include "Input.h"
 
-Game* Engine::m_Game{nullptr};
+Game* Engine::s_Game{nullptr};
 
 Engine::Engine()
 {
@@ -13,7 +13,7 @@ Engine::Engine()
 	Renderer::StartUp();
 	UI::StartUp();
 
-	m_Game = new Game;
+	s_Game = new Game;
 }
 
 Engine::~Engine()
@@ -34,9 +34,9 @@ void Engine::EngineLoop()
 	UI::ClearUI();
 
 	// Update Game
-	m_Game->OnUpdate();
-	m_Game->GameLoop();
-	m_Game->OnRender();
+	s_Game->OnUpdate();
+	s_Game->GameLoop();
+	s_Game->OnRender();
 
 	// Render Present
 	UI::RenderUI();
@@ -46,11 +46,11 @@ void Engine::EngineLoop()
 void Engine::OnUpdate()
 {
 	// Update Game Components and objects
-	m_Game->OnUpdate();
+	s_Game->OnUpdate();
 }
 
 void Engine::OnRender()
 {
 	// Render Game Components and objects
-	m_Game->OnRender();
+	s_Game->OnRender();
 }

@@ -9,13 +9,13 @@ class UI
 public:
 	static void StartUp();
 
-	static ImGuiIO& GetImGuiIO() { return io; }
+	static ImGuiIO& GetImGuiIO() { return s_io; }
 	static void ShutDown();
 
 	static void ClearUI();
 	static void RenderUI();
 private:
-	static ImGuiIO io;
+	static ImGuiIO s_io;
 
 };
 

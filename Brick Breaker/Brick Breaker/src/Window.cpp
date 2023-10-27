@@ -1,11 +1,11 @@
 #include "Window.h"
 
-bool Window::windowOpen{ true };
+bool Window::s_windowOpen{ true };
 
-int Window::m_winWidth{ 1280 };
-int Window::m_winHeight{ 720 };
+int Window::s_winWidth{ 1280 };
+int Window::s_winHeight{ 720 };
 
-SDL_Window* Window::m_window{ NULL };
+SDL_Window* Window::s_window{ NULL };
 
 bool Window::StartUp()
 {
@@ -15,8 +15,8 @@ bool Window::StartUp()
 		return false;
 	}
 
-	m_window = SDL_CreateWindow("OOP Brick Breaker++", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, m_winWidth, m_winHeight, SDL_WINDOW_SHOWN);
-	if (m_window == NULL)
+	s_window = SDL_CreateWindow("OOP Brick Breaker++", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, s_winWidth, s_winHeight, SDL_WINDOW_SHOWN);
+	if (s_window == NULL)
 	{
 		printf("Window could not be created! SDL Error: %s\n", SDL_GetError());
 		return false;
@@ -34,7 +34,7 @@ bool Window::StartUp()
 
 bool Window::Shutdown()
 {
-	SDL_DestroyWindow(m_window);
+	SDL_DestroyWindow(s_window);
 	IMG_Quit();
 	// Mix_Quit();
 

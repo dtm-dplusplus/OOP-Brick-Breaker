@@ -21,16 +21,25 @@ Game::Game()
 	m_GameObjects[1]->GetTexture()->SetTexturePath("res\\textures\\Breakout Tile Set Free\\PNG\\58-Breakout-Tiles.png");
 	m_GameObjects[1]->GetTexture()->LoadTexture();
 
-	for(int i{0}, b{12}; i < b;i++)
+	const int brickNum{ 12 };
+	int rowNum{ 5 };
+	static float width = Window::GetWidthF() / 12;
+	static float height = 40;
+	float yOffset = 100;
+
+	for (int r{ 0 }, rNum{ 5 }; r < rNum; r++)
 	{
-		Object* brick = new Object;
-		brick->SetName("Brick" + std::to_string(i+1));
-		static float width = Window::GetWidthF() / b;
-		brick->SetPosition(i * width, 100);
-		brick->SetCollider(width, 40);
-		brick->GetTexture()->SetTexturePath("res\\textures\\Breakout Tile Set Free\\PNG\\07-Breakout-Tiles.png");
-		brick->GetTexture()->LoadTexture();
-		m_GameObjects.push_back(brick);
+		for (int b{ 0 }; b < brickNum; b++)
+		{
+			static int bCount{ 1 };
+			Object* brick = new Object;
+			brick->SetName("Brick" + std::to_string(bCount++));
+			brick->SetPosition(b * width, yOffset + r * height);
+			brick->SetCollider(width, height);
+			brick->GetTexture()->SetTexturePath("res\\textures\\Breakout Tile Set Free\\PNG\\07-Breakout-Tiles.png");
+			brick->GetTexture()->LoadTexture();
+			m_GameObjects.push_back(brick);
+		}
 	}
 }
 
@@ -51,6 +60,7 @@ void Game::GameLoop()
 	{				  
 		m_GameObjects[1]->GetVelocity() = -m_GameObjects[1]->GetVelocity();
 	}
+
 }
 	
 
@@ -97,13 +107,18 @@ void Game::OnUpdate()
 					ImGui::Text(m_GameObjects[i]->GetTexture()->GetTexurePath().c_str());
 					ImGui::TreePop();
 				}
+				if (ImGui::TreeNode("Render"))
+				{
+					ImGui::Checkbox("Render Object", &m_GameObjects[i]->GetIsRender());
+
+					ImGui::TreePop();
+				}
 				ImGui::TreePop();
 			}
 		}
 		ImGui::TreePop();																																																																																																																																					
 	}
 	ImGui::End();
-
 
 	for (Object*& obj : m_GameObjects){ obj->OnUpdate(); }
 }

@@ -10,7 +10,7 @@ public:
 	static int GetMouseMotionX();
 
 private:
-	static SDL_Event m_Event;
-	static int MouseX, MouseY;
+	static SDL_Event s_Event;
+	static int s_MouseX, s_MouseY;
 };
 

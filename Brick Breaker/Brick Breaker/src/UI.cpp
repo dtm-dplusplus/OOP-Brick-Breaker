@@ -4,16 +4,16 @@
 #include "Renderer.h"
 #include "Window.h"
 
-ImGuiIO UI::io;
+ImGuiIO UI::s_io;
 
 void UI::StartUp()
 {
     // Setup ImGui context
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
-    io = ImGui::GetIO(); (void)io;
-    io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
-    io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
+    s_io = ImGui::GetIO(); (void)s_io;
+    s_io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
+    s_io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
 
     // Setup ImGui style
     ImGui::StyleColorsDark();
