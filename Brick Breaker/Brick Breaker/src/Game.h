@@ -13,9 +13,9 @@ public:
 	virtual void OnUpdate();
 	virtual void OnRender();
 
-	std::vector<Object*> GetObjects() { return Objects; }
+	std::vector<Object*> GetObjects() { return m_GameObjects; }
 private:
 
-	std::vector<Object*> Objects;
+	std::vector<Object*> m_GameObjects;
 };
 

@@ -1,38 +1,58 @@
 #include "Game.h"
 
+#include <SDL_syswm.h>
+
+#include "Input.h"
+
 Game::Game()
 {
-	Objects.push_back(new Object);
-	Objects[0]->SetPosition({ Window::GetWidthHalfF(), Window::GetHeightHalfF() });
+	m_GameObjects.push_back(new Object);
+	m_GameObjects[0]->SetName("Player");
+	m_GameObjects[0]->SetPosition(Window::GetWidthHalfF(), Window::GetHeightF() / 10 * 9);
+	m_GameObjects[0]->SetCollider( 150, 40 );
+	m_GameObjects[0]->GetTexture()->SetTexturePath("res\\textures\\Breakout Tile Set Free\\PNG\\49-Breakout-Tiles.png");
+	m_GameObjects[0]->GetTexture()->LoadTexture();
 
-	for (Object*& obj : Objects)
+	m_GameObjects.push_back(new Object);
+	m_GameObjects[1]->SetName("Ball");
+	m_GameObjects[1]->SetPosition({ Window::GetWidthHalfF(), Window::GetHeightHalfF() });
+	m_GameObjects[1]->SetVelocity(20.f, 0.0f);
+	m_GameObjects[1]->SetCollider( 40, 40);
+	m_GameObjects[1]->GetTexture()->SetTexturePath("res\\textures\\Breakout Tile Set Free\\PNG\\58-Breakout-Tiles.png");
+	m_GameObjects[1]->GetTexture()->LoadTexture();
+
+	for(int i{0}, b{12}; i < b;i++)
 	{
-		obj->SetCollider({{obj->GetPosition().x, obj->GetPosition().y, 40, 40}} );
-		obj->GetTexture()->SetTexturePath("res\\textures\\24-Breakout-Tiles.png");
-		obj->GetTexture()->LoadTexture();
+		Object* brick = new Object;
+		brick->SetName("Brick" + std::to_string(i+1));
+		static float width = Window::GetWidthF() / b;
+		brick->SetPosition(i * width, 100);
+		brick->SetCollider(width, 40);
+		brick->GetTexture()->SetTexturePath("res\\textures\\Breakout Tile Set Free\\PNG\\07-Breakout-Tiles.png");
+		brick->GetTexture()->LoadTexture();
+		m_GameObjects.push_back(brick);
 	}
-
-	Objects[0]->SetName("Ball");
-	Objects[0]->SetVelocity({ 20.f, 0.0f });
 }
 
 Game::~Game()
 {
-	for (Object*& obj : Objects) { delete obj; }
+	for (Object*& obj : m_GameObjects) { delete obj; }
 }
 
 void Game::GameLoop()
 {
 	// Query Inputs with Engine
-
+	m_GameObjects[0]->SetPositionX(Input::GetMouseMotionX());
 
 	// Do Game systems and logic
-	if (Objects[0]->GetCollider()->GetBoundLeft() <= 0 ||
-		Objects[0]->GetCollider()->GetBoundRight() >= Window::GetWidthF())
-	{
-		Objects[0]->GetVelocity() = -Objects[0]->GetVelocity();
+	// Ball movement
+	if (m_GameObjects[1]->GetCollider()->GetBoundLeft() <= 0 ||
+		m_GameObjects[1]->GetCollider()->GetBoundRight() >= Window::GetWidthF())
+	{				  
+		m_GameObjects[1]->GetVelocity() = -m_GameObjects[1]->GetVelocity();
 	}
-}	
+}
+	
 
 
 void Game::OnUpdate()
@@ -49,46 +69,46 @@ void Game::OnUpdate()
 	ImGui::SetNextItemOpen(true, ImGuiCond_Once);
 	if (ImGui::TreeNode("Game Objects"))
 	{
-		for (int i{0}, max{ (int)Objects.size() }; i < max; i++)
+		for (int i{0}, max{ (int)m_GameObjects.size() }; i < max; i++)
 		{
 			if (i == 0) { ImGui::SetNextItemOpen(true, ImGuiCond_Once);}
 
-			if (ImGui::TreeNode(Objects[i]->GetName().c_str()))
+			if (ImGui::TreeNode(m_GameObjects[i]->GetName().c_str()))
 			{
 				if(ImGui::TreeNode("Transform"))
 				{
-					ImGui::DragFloat2("Position", &Objects[i]->GetPosition().x);
-					ImGui::DragFloat2("Velocity", &Objects[i]->GetVelocity().x);
+					ImGui::DragFloat2("Position", &m_GameObjects[i]->GetPosition().x);
+					ImGui::DragFloat2("Velocity", &m_GameObjects[i]->GetVelocity().x);
 					// ImGui::DragFloat2("Scale", &Objects[i]->GetScale().x);
 					ImGui::TreePop();
 				}
 				if (ImGui::TreeNode("Collider"))
 				{
 					ImGui::SeparatorText("Collider Size");
-					ImGui::DragFloat("Width", &Objects[i]->GetCollider()->GetRect().w, 1, 0, INTMAX_MAX);
-					ImGui::DragFloat("Height", &Objects[i]->GetCollider()->GetRect().h, 1, 0, INTMAX_MAX);
+					ImGui::DragFloat("Width", &m_GameObjects[i]->GetCollider()->GetRect().w, 1, 0, INTMAX_MAX);
+					ImGui::DragFloat("Height", &m_GameObjects[i]->GetCollider()->GetRect().h, 1, 0, INTMAX_MAX);
 					ImGui::SeparatorText("Render Options");
-					ImGui::Checkbox("Render Collider", &Objects[i]->GetCollider()->IsRenderCollider());
-					ImGui::ColorEdit4("Color", &Objects[i]->GetCollider()->Color.r);
+					ImGui::Checkbox("Render Collider", &m_GameObjects[i]->GetCollider()->IsRenderCollider());
+					ImGui::ColorEdit4("Color", &m_GameObjects[i]->GetCollider()->Color.r);
 					ImGui::TreePop();
 				}
 				if (ImGui::TreeNode("Texture"))
 				{
-					ImGui::Text(Objects[i]->GetTexture()->GetTexurePath().c_str());
+					ImGui::Text(m_GameObjects[i]->GetTexture()->GetTexurePath().c_str());
 					ImGui::TreePop();
 				}
 				ImGui::TreePop();
 			}
 		}
-		ImGui::TreePop();
+		ImGui::TreePop();																																																																																																																																					
 	}
 	ImGui::End();
 
 
-	for (Object*& obj : Objects){ obj->OnUpdate(); }
+	for (Object*& obj : m_GameObjects){ obj->OnUpdate(); }
 }
 
 void Game::OnRender()
 {
-	for (Object*& obj : Objects) { obj->OnRender(); }
+	for (Object*& obj : m_GameObjects) { obj->OnRender(); }
 }

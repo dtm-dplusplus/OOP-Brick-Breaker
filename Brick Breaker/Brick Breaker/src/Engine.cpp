@@ -3,6 +3,7 @@
 #include "Core.h"
 #include "VideoManager.h"
 #include "Game.h"
+#include "Input.h"
 
 Game* Engine::m_Game{nullptr};
 
@@ -26,41 +27,7 @@ Engine::~Engine()
 void Engine::EngineLoop()
 {
 	// Poll Input & Events
-	SDL_Event event;
-	while (SDL_PollEvent(&event) != 0)
-	{
-		ImGui_ImplSDL2_ProcessEvent(&event);
-		switch (event.type)
-		{
-		case SDL_KEYDOWN:
-		{
-			std::cout << "key down: " << std::to_string(event.key.keysym.sym) << std::endl;
-		}
-
-		case SDL_MOUSEBUTTONDOWN:
-		{
-			std::cout << "mouse down: " << std::to_string(event.button.button) << std::endl;
-		}
-		case SDL_WINDOWEVENT:
-		{
-			switch (event.window.event)
-			{
-			case SDL_WINDOWEVENT_CLOSE:
-			{
-				Window::SetWindowOpen(false);
-			}
-
-			case SDL_WINDOWEVENT_RESIZED:
-			{
-				// Resize Function
-			}
-
-			default: {}
-			}
-		}
-		default: {}
-		}
-	}
+	Input::PollInput();
 
 	// Clear Renderer
 	Renderer::ClearRenderer();

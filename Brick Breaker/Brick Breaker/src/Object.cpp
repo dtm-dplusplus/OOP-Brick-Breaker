@@ -68,6 +68,21 @@ void Object::SetPosition(const glm::vec2& _position)
 	m_Position = _position;
 }
 
+void Object::SetPosition(const float _x, const float _y)
+{
+	m_Position = { _x, _y };
+}
+
+void Object::SetPositionX(const float _x)
+{
+	m_Position.x = _x;
+}
+
+void Object::SetPositionY(const float _y)
+{
+	m_Position.y = _y;
+}
+
 glm::vec2& Object::GetVelocity()
 {
 	return m_Velocity;
@@ -81,6 +96,11 @@ glm::vec2 Object::GetVelocity() const
 void Object::SetVelocity(const glm::vec2& _velocity)
 {
 	m_Velocity = _velocity;
+}
+
+void Object::SetVelocity(const float _x, const float _y)
+{
+	m_Velocity = { _x, _y };
 }
 
 glm::vec2& Object::GetScale()
@@ -108,9 +128,14 @@ Collider* Object::GetCollider() const
 	return m_Collider;
 }
 
-void Object::SetCollider(const ::Collider& _collider)
+void Object::SetCollider(const Collider& _collider) const
 {
-	m_Collider = new ::Collider(_collider);
+	*m_Collider = _collider;
+}
+
+void Object::SetCollider(const float _w, const float _h) const
+{
+	*m_Collider = { m_Position.x , m_Position.y, _w, _h };
 }
 
 Texture*& Object::GetTexture()

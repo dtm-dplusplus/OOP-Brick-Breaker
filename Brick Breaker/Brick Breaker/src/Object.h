@@ -20,10 +20,16 @@ public:
 	glm::vec2& GetPosition();
 	glm::vec2 GetPosition() const;
 	void SetPosition(const glm::vec2& _position);
+	void SetPosition(const float _x, const float _y);
+	void SetPositionX(const float _x);
+	void SetPositionY(const float _y);
+
 
 	glm::vec2& GetVelocity();
 	glm::vec2 GetVelocity() const;
 	void SetVelocity(const glm::vec2& _velocity);
+	void SetVelocity(const float _x,const float _y);
+
 
 	glm::vec2& GetScale();
 	glm::vec2 GetScale() const;
@@ -31,7 +37,9 @@ public:
 
 	Collider*& GetCollider();
 	Collider* GetCollider() const;
-	void SetCollider(const Collider& _collider);
+	void SetCollider(const Collider& _collider) const;
+	void SetCollider(const float _w, float _h) const;
+
 
 	Texture*& GetTexture();
 
