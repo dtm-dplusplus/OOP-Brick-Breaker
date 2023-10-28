@@ -1,7 +1,7 @@
 #include "Renderer.h"
 
-#include "UI.h"
 #include "Window.h"
+#include "UI/UI.h"
 
 SDL_Renderer* Renderer::s_Renderer{ NULL };
 SDL_Color Renderer::s_ClearColor{ 0x00, 0x00, 0x00,0xFF };

@@ -1,7 +1,9 @@
 #pragma once
-#include "Object.h"
-#include "Core.h"
-#include "VideoManager.h"
+#ifndef _GAME_H_
+#define _GAME_H_
+
+#include "Level/Level.h"
+#include "Level/DebugLevel.h"
 
 class Game
 {
@@ -9,13 +11,12 @@ public:
 	Game();
 	virtual ~Game();
 
-	virtual void GameLoop();
 	virtual void OnUpdate();
 	virtual void OnRender();
 
-	std::vector<Object*> GetObjects() { return m_GameObjects; }
 private:
-
-	std::vector<Object*> m_GameObjects;
+	Level* m_CurrentLevel;
+	std::vector<Level*> m_Levels;
 };
 
+#endif

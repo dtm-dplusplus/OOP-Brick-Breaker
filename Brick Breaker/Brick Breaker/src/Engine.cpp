@@ -1,11 +1,13 @@
 #include "Engine.h"
 
 #include "Core.h"
-#include "VideoManager.h"
-#include "Game.h"
-#include "Input.h"
+#include "Input/Input.h"
+#include "UI/UI.h"
+#include "Video/Renderer.h"
+#include "Video/Window.h"
 
 Game* Engine::s_Game{nullptr};
+bool Engine::isRunning{ true };
 
 Engine::Engine()
 {
@@ -14,6 +16,7 @@ Engine::Engine()
 	UI::StartUp();
 
 	s_Game = new Game;
+
 }
 
 Engine::~Engine()
@@ -22,6 +25,11 @@ Engine::~Engine()
 	Renderer::Shutdown();
 	UI::ShutDown();
 	SDL_Quit();
+}
+
+bool Engine::GetIsRunning() const
+{
+	return isRunning;
 }
 
 void Engine::EngineLoop()
@@ -35,12 +43,13 @@ void Engine::EngineLoop()
 
 	// Update Game
 	s_Game->OnUpdate();
-	s_Game->GameLoop();
 	s_Game->OnRender();
 
 	// Render Present
 	UI::RenderUI();
 	Renderer::UpdateRenderer();
+
+	isRunning = Window::GetWindowOpen();
 }
 
 void Engine::OnUpdate()

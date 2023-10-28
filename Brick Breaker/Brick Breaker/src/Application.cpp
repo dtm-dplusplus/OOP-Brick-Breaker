@@ -1,9 +1,6 @@
 #include "Application.h"
 
 #include "Engine.h"
-#include "VideoManager.h"
-#include "Window.h"
-
 
 Application::Application()
 {
@@ -17,5 +14,5 @@ Application::~Application()
 
 void Application::Run() const
 {
-	while (Window::GetWindowOpen()) { m_Engine->EngineLoop(); }
+	while (m_Engine->GetIsRunning()) { m_Engine->EngineLoop(); }
 }

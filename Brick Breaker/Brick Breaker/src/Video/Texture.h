@@ -1,5 +1,6 @@
 #pragma once
-
+#ifndef _TEXTURE_H_
+#define _TEXTURE_H_
 #include "Core.h"
 
 class Texture
@@ -21,3 +22,5 @@ private:
 	SDL_Texture* m_Texture;
 	std::string m_Path;
 };
+
+#endif

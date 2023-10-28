@@ -1,5 +1,11 @@
 #pragma once
+#ifndef _UI_H_
+#define _UI_H_
 
+
+#include "Core.h"
+
+#include "imgui.h"
 #include "imgui_internal.h"
 #include "imgui_impl_sdl2.h"
 #include "imgui_impl_sdlrenderer2.h"
@@ -19,3 +25,4 @@ private:
 
 };
 
+#endif

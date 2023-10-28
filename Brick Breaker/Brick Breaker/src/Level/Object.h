@@ -1,7 +1,9 @@
 #pragma once
+#ifndef _OBJECT_H_
+#define _OBJECT_H_
 
 #include "Core.h"
-#include "Texture.h"
+#include "Video/Renderer.h"
 
 class Object
 {
@@ -60,3 +62,4 @@ private:
 	int ObjectID;
 };
 
+#endif

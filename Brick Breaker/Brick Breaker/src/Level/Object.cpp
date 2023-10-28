@@ -1,9 +1,5 @@
 #include "Object.h"
 
-#include <Windows.h>
-
-#include "Renderer.h"
-
 int Object::s_ObjectCount{1};
 
 

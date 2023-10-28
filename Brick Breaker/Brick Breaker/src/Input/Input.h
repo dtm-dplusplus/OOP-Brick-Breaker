@@ -1,4 +1,6 @@
 #pragma once
+#ifndef _INPUT_H_
+#define _INPUT_H_
 
 #include "Core.h"
 
@@ -14,3 +16,4 @@ private:
 	static int s_MouseX, s_MouseY;
 };
 
+#endif

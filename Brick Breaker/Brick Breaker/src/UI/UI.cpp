@@ -1,8 +1,8 @@
 #include "UI.h"
 
+#include "Video/Renderer.h"
+#include "Video/Window.h"
 
-#include "Renderer.h"
-#include "Window.h"
 
 ImGuiIO UI::s_io;
 

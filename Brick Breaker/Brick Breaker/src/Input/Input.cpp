@@ -1,6 +1,7 @@
 #include "Input.h"
-#include "UI.h"
-#include "Window.h"
+
+#include "imgui_impl_sdl2.h"
+#include "Video/Window.h"
 
 SDL_Event Input:: s_Event{};
 int Input::s_MouseX{};

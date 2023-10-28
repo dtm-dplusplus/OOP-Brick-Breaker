@@ -73,6 +73,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)bin\$(Configuration)-$(Platform)\$(ProjectName)\</OutDir>
     <IntDir>$(SolutionDir)bin-int\$(Configuration)-$(Platform)\$(ProjectName)\</IntDir>
+    <IncludePath>$(SolutionDir)\Brick Breaker\src\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)bin\$(Configuration)-$(Platform)\$(ProjectName)\</OutDir>
@@ -143,16 +144,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\Input.h" />
+    <ClInclude Include="src\Level\DebugLevel.h" />
+    <ClInclude Include="src\Level\Level.h" />
+    <ClInclude Include="src\Input\Input.h" />
     <ClInclude Include="src\Game.h" />
     <ClInclude Include="src\Application.h" />
     <ClInclude Include="src\Engine.h" />
-    <ClInclude Include="src\Object.h" />
-    <ClInclude Include="src\Renderer.h" />
+    <ClInclude Include="src\Level\Object.h" />
+    <ClInclude Include="src\Video\Renderer.h" />
     <ClInclude Include="src\Core.h" />
-    <ClInclude Include="src\VideoManager.h" />
-    <ClInclude Include="src\Window.h" />
-    <ClInclude Include="src\UI.h" />
+    <ClInclude Include="src\Video\Window.h" />
+    <ClInclude Include="src\UI\UI.h" />
     <ClInclude Include="src\vendor\imgui-master\imconfig.h" />
     <ClInclude Include="src\vendor\imgui-master\imgui.h" />
     <ClInclude Include="src\vendor\imgui-master\imgui_impl_sdl2.h" />
@@ -161,20 +163,21 @@
     <ClInclude Include="src\vendor\imgui-master\imstb_rectpack.h" />
     <ClInclude Include="src\vendor\imgui-master\imstb_textedit.h" />
     <ClInclude Include="src\vendor\imgui-master\imstb_truetype.h" />
-    <ClInclude Include="src\Texture.h" />
+    <ClInclude Include="src\Video\Texture.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Input.cpp" />
+    <ClCompile Include="src\Level\DebugLevel.cpp" />
+    <ClCompile Include="src\Level\Level.cpp" />
+    <ClCompile Include="src\Input\Input.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\Application.cpp" />
     <ClCompile Include="src\Engine.cpp" />
-    <ClCompile Include="src\Object.cpp" />
-    <ClCompile Include="src\Renderer.cpp" />
+    <ClCompile Include="src\Level\Object.cpp" />
+    <ClCompile Include="src\Video\Renderer.cpp" />
     <ClCompile Include="src\Core.cpp" />
     <ClCompile Include="src\Main.cpp" />
-    <ClCompile Include="src\VideoManager.cpp" />
-    <ClCompile Include="src\Window.cpp" />
-    <ClCompile Include="src\UI.cpp" />
+    <ClCompile Include="src\Video\Window.cpp" />
+    <ClCompile Include="src\UI\UI.cpp" />
     <ClCompile Include="src\vendor\imgui-master\imgui.cpp" />
     <ClCompile Include="src\vendor\imgui-master\imgui_demo.cpp" />
     <ClCompile Include="src\vendor\imgui-master\imgui_draw.cpp" />
@@ -182,7 +185,7 @@
     <ClCompile Include="src\vendor\imgui-master\imgui_impl_sdlrenderer2.cpp" />
     <ClCompile Include="src\vendor\imgui-master\imgui_tables.cpp" />
     <ClCompile Include="src\vendor\imgui-master\imgui_widgets.cpp" />
-    <ClCompile Include="src\Texture.cpp" />
+    <ClCompile Include="src\Video\Texture.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
